@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/tv_your_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Quiz Score is :"
+        android:textColor="@color/colorGreen"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"/>
+
+    <LinearLayout
+        android:id="@+id/linear_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/tv_your_score"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_little"
+        android:layout_centerHorizontal="true"
+        android:padding="12dp">
+
+
+        <TextView
+            android:id="@+id/tv_correct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorGreen"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginStart="4dp"
+            android:textColor="@color/colorPrimary"/>
+
+        <TextView
+            android:id="@+id/tv_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginStart="4dp"
+            android:textColor="@color/colorBlack"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_you_have"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_correct"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_below="@id/linear_score"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"/>
+
+    <TextView
+        android:id="@+id/tv_out_of"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_out_of"
+        android:textColor="@color/colorPrimaryLight"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_below="@id/tv_you_have"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"/>
+
+    <TextView
+        android:id="@+id/tv_remark_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_out_of"
+        android:layout_centerHorizontal="true"
+        android:text="Remark:"
+        android:textSize="20sp"
+        android:textColor="@color/colorAccent"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/tv_remark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_remark_label"
+        android:layout_centerHorizontal="true"
+        tools:text="Remark:"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorBlack"
+        android:layout_marginTop="4dp"/>
+
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/tv_play_again"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Play Again"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:padding="20dp"
+        app:cornerRadius="12dp"
+        android:layout_margin="24dp"/>
+
+
+
+</RelativeLayout>

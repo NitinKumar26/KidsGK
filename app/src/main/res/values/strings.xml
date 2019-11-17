@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Kids GK</string>
+    <string name="your_score">Your Score</string>
+    <string name="tv_correct">You have answered %1$s correct question(s)</string>
+    <string name="tv_out_of">Out of total %1$s questions</string>
+    <string name="play_now">Play Now</string>
+    <string name="welcome">Welcome</string>
+    <string name="kids_gk">Kids GK</string>
+    <string name="banner">banner</string>
+    <string name="second_banner">second_banner</string>
+
+    <string name="admob_app_id">ca-app-pub-4214231949040116~9163055877</string>
+    <string name="banner_ad_id">ca-app-pub-4214231949040116/5335491509</string>
+    <string name="interstitial_ad_id">ca-app-pub-4214231949040116/3605824479</string>
+
+</resources>
