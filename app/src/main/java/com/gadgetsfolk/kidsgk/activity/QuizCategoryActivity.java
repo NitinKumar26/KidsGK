@@ -62,13 +62,10 @@ public class QuizCategoryActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(QuizCategoryActivity.this, RecyclerView.VERTICAL));
         recyclerView.setAdapter(adapter);
 
-        recyclerView.addOnItemTouchListener(new HelperMethods.RecyclerTouchListener(QuizCategoryActivity.this, new HelperMethods.ClickListener() {
-            @Override
-            public void onClick(int position) {
-                Intent intent = new Intent(QuizCategoryActivity.this, QuizSubCategoryActivity.class);
-                intent.putExtra("quiz_type", mQuizType.get(position));
-                startActivity(intent);
-            }
+        recyclerView.addOnItemTouchListener(new HelperMethods.RecyclerTouchListener(QuizCategoryActivity.this, position -> {
+            Intent intent = new Intent(QuizCategoryActivity.this, QuizSubCategoryActivity.class);
+            intent.putExtra("quiz_type", mQuizType.get(position));
+            startActivity(intent);
         }));
 
         getQuizCategories();

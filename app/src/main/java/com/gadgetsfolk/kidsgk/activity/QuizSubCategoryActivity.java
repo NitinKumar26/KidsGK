@@ -19,6 +19,8 @@ import com.gadgetsfolk.kidsgk.R;
 import com.gadgetsfolk.kidsgk.adapter.QuizTypeAdapter;
 import com.gadgetsfolk.kidsgk.helper.HelperMethods;
 import com.gadgetsfolk.kidsgk.model.QuizType;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -45,6 +47,7 @@ public class QuizSubCategoryActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private QuizTypeAdapter quizTypeAdapter;
     private QuizType quizType;
+    private InterstitialAd interstitialAd;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -81,6 +84,10 @@ public class QuizSubCategoryActivity extends AppCompatActivity {
         }));
 
         getQuizSubCategories();
+
+        interstitialAd = new InterstitialAd(this);
+        interstitialAd.setAdUnitId(QuizSubCategoryActivity.this.getResources().getString(R.string.interstitial_ad_id));
+        interstitialAd.loadAd(new AdRequest.Builder().build());
     }
 
     private void getQuizSubCategories(){
@@ -108,5 +115,13 @@ public class QuizSubCategoryActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (interstitialAd.isLoaded()){
+            interstitialAd.show();
+        }
     }
 }

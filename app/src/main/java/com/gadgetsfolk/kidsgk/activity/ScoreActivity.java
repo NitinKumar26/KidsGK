@@ -127,5 +127,4 @@ public class ScoreActivity extends AppCompatActivity {
             super.onAdImpression();
         }
     };
-
 }

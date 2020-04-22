@@ -40,27 +40,50 @@
         android:textColor="@color/colorBlack"
         android:textStyle="bold"
         android:layout_marginTop="20dp"
-        android:layout_above="@id/tv_play_again"/>
+        android:layout_above="@id/linear"/>
 
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/tv_play_again"
+    <LinearLayout
+        android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="@string/play_now"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textAllCaps="false"
-        android:gravity="center"
-        android:clickable="true"
-        android:focusable="true"
-        app:cornerRadius="12dp"
-        android:layout_centerInParent="true"
-        android:padding="20dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginEnd="48dp"/>
+        android:orientation="vertical"
+        android:layout_centerInParent="true">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_quiz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/play_now"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            app:cornerRadius="12dp"
+            android:padding="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginEnd="48dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_video"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Videos"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            app:cornerRadius="12dp"
+            android:padding="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginEnd="48dp"/>
+
+    </LinearLayout>
 
     <ImageView
         android:contentDescription="@string/second_banner"

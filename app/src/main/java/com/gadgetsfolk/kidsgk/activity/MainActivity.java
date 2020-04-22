@@ -1,14 +1,11 @@
 package com.gadgetsfolk.kidsgk.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
-
 import com.gadgetsfolk.kidsgk.R;
-import com.google.android.material.button.MaterialButton;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,13 +13,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+    }
 
-        MaterialButton tvHello = findViewById(R.id.tv_play_again);
-        tvHello.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, QuizCategoryActivity.class));
-            }
-        });
+    @OnClick(R.id.btn_quiz)
+    void startQuizActivity(){
+        startActivity(new Intent(MainActivity.this, QuizCategoryActivity.class));
+    }
+
+    @OnClick(R.id.btn_video)
+    void startVideoActivity(){
+        startActivity(new Intent(MainActivity.this, VideoActivity.class));
     }
 }

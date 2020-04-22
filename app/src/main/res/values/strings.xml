@@ -13,4 +13,8 @@
     <string name="banner_ad_id">ca-app-pub-4214231949040116/5335491509</string>
     <string name="interstitial_ad_id">ca-app-pub-4214231949040116/3605824479</string>
 
+    <string name="api_key">AIzaSyBz3yFUUy94BuVlcBDlA6NHY5l_ekgG9is</string>
+
+    <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
+
 </resources>

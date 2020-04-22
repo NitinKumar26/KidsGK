@@ -31,10 +31,8 @@ public class QuizTypeAdapter extends RecyclerView.Adapter<QuizTypeAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull QuizTypeAdapter.ViewHolder holder, int position) {
         QuizType quizType = mQuizTypeList.get(position);
-        //holder.imgIcon.setImageResource(quizType.getImg_url());
         holder.tvTitle.setText(quizType.getTitle());
         holder.tvSubTitle.setText(quizType.getSub_title());
-        //GlideApp.with(mContext).load(quizType.getImg_url()).placeholder(R.color.colorGrey).into(holder.imgIcon);
         holder.tvImage.setText(String.valueOf(quizType.getTitle().charAt(0)));
 
         if (position % 5 == 0) holder.relativeLayout.setBackground(mContext.getResources().getDrawable(R.drawable.gradient_two));
@@ -50,7 +48,7 @@ public class QuizTypeAdapter extends RecyclerView.Adapter<QuizTypeAdapter.ViewHo
         return mQuizTypeList.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    static class ViewHolder extends RecyclerView.ViewHolder{
         private TextView tvTitle, tvSubTitle, tvImage;
         private RelativeLayout relativeLayout;
 
