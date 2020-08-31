@@ -8,13 +8,30 @@
     <string name="kids_gk">Kids GK</string>
     <string name="banner">banner</string>
     <string name="second_banner">second_banner</string>
+    <string name="quiz">Quiz</string>
+    <string name="video">Videos</string>
 
     <string name="admob_app_id">ca-app-pub-4214231949040116~9163055877</string>
     <string name="banner_ad_id">ca-app-pub-4214231949040116/5335491509</string>
+    <string name="native_ad_unit">ca-app-pub-4214231949040116/2738998426</string>
     <string name="interstitial_ad_id">ca-app-pub-4214231949040116/3605824479</string>
+    <string name="vid_interstitial_ad_id">ca-app-pub-4214231949040116/7071050163</string>
+    
+    <string name="adcolony_app_id">app04b6e7f570e14a4099</string>
+    <string name="adcolony_interstitial">vzf2a08536b08544bf8b</string>
+    <string name="adcolony_banner">vz2a6a2671708740fb88</string>
+
+    <string name="unity_game_id">3798533</string>
+    <string name="unity_interstitial">KGInterstitial</string>
+    <string name="unity_banner">KGBanner</string>
+
+    <!--
+    <string name="native_advanced_test">ca-app-pub-3940256099942544/2247696110</string>
+    <string name="banner_test_ad_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="test_interstitial">ca-app-pub-3940256099942544/1033173712</string>
+    -->
 
     <string name="api_key">AIzaSyBz3yFUUy94BuVlcBDlA6NHY5l_ekgG9is</string>
-
     <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
 
 </resources>

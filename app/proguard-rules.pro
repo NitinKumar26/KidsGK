@@ -25,3 +25,8 @@
   **[] $VALUES;
   public *;
 }
+
+-keepattributes SourceFile,LineNumberTable        # Keep file names and line numbers.
+-keep public class * extends java.lang.Exception  # Optional: Keep custom exceptions.
+-keep class com.crashlytics.** { *; }
+-dontwarn com.crashlytics.**

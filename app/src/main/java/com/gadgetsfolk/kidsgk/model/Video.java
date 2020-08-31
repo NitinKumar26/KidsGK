@@ -1,9 +1,11 @@
 package com.gadgetsfolk.kidsgk.model;
 
+import androidx.annotation.Keep;
+
+@Keep
 public class Video {
     private String title;
     private String sub_title;
-    private String thumbnail;
     private String video_link;
 
     public String getVideo_link() {
@@ -30,11 +32,4 @@ public class Video {
         this.sub_title = sub_title;
     }
 
-    public String getThumbnail() {
-        return thumbnail;
-    }
-
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
-    }
 }

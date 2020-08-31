@@ -4,6 +4,7 @@
     <bytecodeTargetLevel>
       <module name="app" target="1.8" />
       <module name="Kids_GK.app" target="1.8" />
+      <module name="Kids_GK.nativetemplates" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

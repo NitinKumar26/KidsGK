@@ -1,0 +1,15 @@
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_quiz"
+        android:title="Quiz"
+        android:icon="@drawable/ic_quiz"/>
+
+    <item
+        android:id="@+id/action_videos"
+        android:title="Videos"
+        android:icon="@drawable/ic_video"
+        />
+
+</menu>

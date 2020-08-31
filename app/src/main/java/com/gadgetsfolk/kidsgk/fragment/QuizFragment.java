@@ -24,15 +24,29 @@ import com.rishabhharit.roundedimageview.RoundedImageView;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class QuizFragment extends Fragment implements View.OnClickListener{
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+public class QuizFragment extends Fragment{
     private int currentPageNumber;
     private Quiz quiz;
-    private TextView tvQuestion, tvOptionOne, tvOptionTwo, tvOptionThree, tvOptionFour;
-    private RoundedImageView imgQuestion;
-    private AdView mAdView;
     private MediaPlayer mediaCorrect;
     private MediaPlayer mediaWrong;
-
+    @BindView(R.id.img_question)
+    RoundedImageView imgQuestion;
+    @BindView(R.id.adView)
+    AdView mAdView;
+    @BindView(R.id.tv_question)
+    TextView tvQuestion;
+    @BindView(R.id.tv_option_one)
+    TextView tvOptionOne;
+    @BindView(R.id.tv_option_two)
+    TextView tvOptionTwo;
+    @BindView(R.id.tv_option_three)
+    TextView tvOptionThree;
+    @BindView(R.id.tv_option_four)
+    TextView tvOptionFour;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,7 +57,9 @@ public class QuizFragment extends Fragment implements View.OnClickListener{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_quiz, container, false);
+        View view = inflater.inflate(R.layout.fragment_quiz, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
@@ -53,17 +69,9 @@ public class QuizFragment extends Fragment implements View.OnClickListener{
 
         quiz = QuizActivity.mQuizList.get(currentPageNumber);
 
-        tvQuestion = view.findViewById(R.id.tv_question);
-        imgQuestion = view.findViewById(R.id.img_question);
-        tvOptionOne = view.findViewById(R.id.tv_option_one);
-        tvOptionTwo = view.findViewById(R.id.tv_option_two);
-        tvOptionThree = view.findViewById(R.id.tv_option_three);
-        tvOptionFour = view.findViewById(R.id.tv_option_four);
-
         mediaCorrect = MediaPlayer.create(getContext(), R.raw.correct);
         mediaWrong = MediaPlayer.create(getContext(), R.raw.wrong);
 
-        mAdView = view.findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
@@ -81,120 +89,110 @@ public class QuizFragment extends Fragment implements View.OnClickListener{
         tvOptionThree.setText(options.get(2)); //Set Option Three
         tvOptionFour.setText(options.get(3)); //Set Option Four
 
-        Glide.with(view.getContext()).load(quiz.getImg_url()).placeholder(R.color.colorGrey).into(imgQuestion);
+        Glide.with(view.getContext())
+                .load(quiz.getImg_url())
+                .placeholder(R.color.colorGrey)
+                .into(imgQuestion);
 
-        tvOptionOne.setOnClickListener(this);
-        tvOptionTwo.setOnClickListener(this);
-        tvOptionThree.setOnClickListener(this);
-        tvOptionFour.setOnClickListener(this);
 
-        mediaWrong.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mediaPlayer) {
-                mediaWrong.release();
-                QuizActivity.viewPager.setCurrentItem(currentPageNumber + 1);
-            }
+        mediaWrong.setOnCompletionListener(mediaPlayer -> {
+            mediaWrong.release();
+            QuizActivity.viewPager.setCurrentItem(currentPageNumber + 1);
         });
 
-        mediaCorrect.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mediaPlayer) {
-                mediaCorrect.release();
-                QuizActivity.viewPager.setCurrentItem(currentPageNumber + 1);
-            }
+        mediaCorrect.setOnCompletionListener(mediaPlayer -> {
+            mediaCorrect.release();
+            QuizActivity.viewPager.setCurrentItem(currentPageNumber + 1);
         });
 
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.tv_option_one:
-                if (tvOptionOne.getText().toString().equals(quiz.getAnswer())) {
-                    tvOptionOne.setBackgroundResource(R.drawable.bg_answer);
-                    tvOptionTwo.setOnClickListener(null);
-                    tvOptionThree.setOnClickListener(null);
-                    tvOptionFour.setOnClickListener(null);
-                    mediaCorrect.start();
-                    QuizActivity.quizScore += 1;
-                    setScore(QuizActivity.quizScore);
-                }else{
-                    tvOptionOne.setBackgroundResource(R.drawable.bg_wrong_answer);
-                    tvOptionTwo.setOnClickListener(null);
-                    tvOptionThree.setOnClickListener(null);
-                    tvOptionFour.setOnClickListener(null);
-                    mediaWrong.start();
-                    setScore(QuizActivity.quizScore);
-                    //QuizActivity.viewPager.setCurrentItem(currentPageNumber + 1);
-                }
-                break;
-            case R.id.tv_option_two:
-                if (tvOptionTwo.getText().toString().equals(quiz.getAnswer())) {
-                    tvOptionTwo.setBackgroundResource(R.drawable.bg_answer);
-                    tvOptionThree.setOnClickListener(null);
-                    tvOptionFour.setOnClickListener(null);
-                    tvOptionOne.setOnClickListener(null);
-                    mediaCorrect.start();
-                    QuizActivity.quizScore += 1;
-                    setScore(QuizActivity.quizScore);
-                    //QuizActivity.viewPager.setCurrentItem(currentPageNumber + 1);
-                }else{
-                    tvOptionTwo.setBackgroundResource(R.drawable.bg_wrong_answer);
-                    tvOptionThree.setOnClickListener(null);
-                    tvOptionFour.setOnClickListener(null);
-                    tvOptionOne.setOnClickListener(null);
-                    mediaWrong.start();
-                    setScore(QuizActivity.quizScore);
-                    //QuizActivity.viewPager.setCurrentItem(currentPageNumber + 1);
-                }
-                break;
-            case R.id.tv_option_three:
-                if (tvOptionThree.getText().toString().equals(quiz.getAnswer())) {
-                    tvOptionThree.setBackgroundResource(R.drawable.bg_answer);
-                    tvOptionFour.setOnClickListener(null);
-                    tvOptionOne.setOnClickListener(null);
-                    tvOptionTwo.setOnClickListener(null);
-                    mediaCorrect.start();
-                    QuizActivity.quizScore += 1;
-                    setScore(QuizActivity.quizScore);
-                    //QuizActivity.viewPager.setCurrentItem(currentPageNumber + 1);
-                }else{
-                    tvOptionThree.setBackgroundResource(R.drawable.bg_wrong_answer);
-                    tvOptionFour.setOnClickListener(null);
-                    tvOptionOne.setOnClickListener(null);
-                    tvOptionTwo.setOnClickListener(null);
-                    mediaWrong.start();
-                    setScore(QuizActivity.quizScore);
-                    //QuizActivity.viewPager.setCurrentItem(currentPageNumber + 1);
-                }
-                break;
-            case R.id.tv_option_four:
-                if (tvOptionFour.getText().toString().equals(quiz.getAnswer())) {
-                    tvOptionFour.setBackgroundResource(R.drawable.bg_answer);
-                    tvOptionThree.setOnClickListener(null);
-                    tvOptionTwo.setOnClickListener(null);
-                    tvOptionOne.setOnClickListener(null);
-                    mediaCorrect.start();
-                    QuizActivity.quizScore += 1;
-                    setScore(QuizActivity.quizScore);
-                    //QuizActivity.viewPager.setCurrentItem(currentPageNumber + 1);
-                }else{
-                    tvOptionFour.setBackgroundResource(R.drawable.bg_wrong_answer);
-                    tvOptionThree.setOnClickListener(null);
-                    tvOptionTwo.setOnClickListener(null);
-                    tvOptionOne.setOnClickListener(null);
-                    mediaWrong.start();
-                    setScore(QuizActivity.quizScore);
-                    //QuizActivity.viewPager.setCurrentItem(currentPageNumber + 1);
-                }
-                break;
+    @OnClick(R.id.tv_option_one)
+    void onOptionOneSelected(){
+        if (tvOptionOne.getText().toString().equals(quiz.getAnswer())) {
+            tvOptionOne.setBackgroundResource(R.drawable.bg_answer);
+            tvOptionTwo.setOnClickListener(null);
+            tvOptionThree.setOnClickListener(null);
+            tvOptionFour.setOnClickListener(null);
+            mediaCorrect.start();
+            QuizActivity.quizScore += 1;
+        }else{
+            tvOptionOne.setBackgroundResource(R.drawable.bg_wrong_answer);
+            tvOptionTwo.setOnClickListener(null);
+            tvOptionThree.setOnClickListener(null);
+            tvOptionFour.setOnClickListener(null);
+            mediaWrong.start();
+            //QuizActivity.viewPager.setCurrentItem(currentPageNumber + 1);
         }
+        setScore(QuizActivity.quizScore);
+    }
 
+    @OnClick(R.id.tv_option_two)
+    void onOptionTwoSelected(){
+        if (tvOptionTwo.getText().toString().equals(quiz.getAnswer())) {
+            tvOptionTwo.setBackgroundResource(R.drawable.bg_answer);
+            tvOptionThree.setOnClickListener(null);
+            tvOptionFour.setOnClickListener(null);
+            tvOptionOne.setOnClickListener(null);
+            mediaCorrect.start();
+            QuizActivity.quizScore += 1;
+            //QuizActivity.viewPager.setCurrentItem(currentPageNumber + 1);
+        }else{
+            tvOptionTwo.setBackgroundResource(R.drawable.bg_wrong_answer);
+            tvOptionThree.setOnClickListener(null);
+            tvOptionFour.setOnClickListener(null);
+            tvOptionOne.setOnClickListener(null);
+            mediaWrong.start();
+            //QuizActivity.viewPager.setCurrentItem(currentPageNumber + 1);
+        }
+        setScore(QuizActivity.quizScore);
+    }
+
+    @OnClick(R.id.tv_option_three)
+    void onOptionThreeSelected(){
+        if (tvOptionThree.getText().toString().equals(quiz.getAnswer())) {
+            tvOptionThree.setBackgroundResource(R.drawable.bg_answer);
+            tvOptionFour.setOnClickListener(null);
+            tvOptionOne.setOnClickListener(null);
+            tvOptionTwo.setOnClickListener(null);
+            mediaCorrect.start();
+            QuizActivity.quizScore += 1;
+            //QuizActivity.viewPager.setCurrentItem(currentPageNumber + 1);
+        }else{
+            tvOptionThree.setBackgroundResource(R.drawable.bg_wrong_answer);
+            tvOptionFour.setOnClickListener(null);
+            tvOptionOne.setOnClickListener(null);
+            tvOptionTwo.setOnClickListener(null);
+            mediaWrong.start();
+            //QuizActivity.viewPager.setCurrentItem(currentPageNumber + 1);
+        }
+        setScore(QuizActivity.quizScore);
+    }
+
+    @OnClick(R.id.tv_option_four)
+    void onOptionFourSelected(){
+        if (tvOptionFour.getText().toString().equals(quiz.getAnswer())) {
+            tvOptionFour.setBackgroundResource(R.drawable.bg_answer);
+            tvOptionThree.setOnClickListener(null);
+            tvOptionTwo.setOnClickListener(null);
+            tvOptionOne.setOnClickListener(null);
+            mediaCorrect.start();
+            QuizActivity.quizScore += 1;
+            //QuizActivity.viewPager.setCurrentItem(currentPageNumber + 1);
+        }else{
+            tvOptionFour.setBackgroundResource(R.drawable.bg_wrong_answer);
+            tvOptionThree.setOnClickListener(null);
+            tvOptionTwo.setOnClickListener(null);
+            tvOptionOne.setOnClickListener(null);
+            mediaWrong.start();
+            //QuizActivity.viewPager.setCurrentItem(currentPageNumber + 1);
+        }
+        setScore(QuizActivity.quizScore);
     }
 
     private void setScore(int score){
         QuizActivity.questionsAttempted += 1;
-        Log.e("att", String.valueOf(QuizActivity.questionsAttempted));
+        //Log.e("att", String.valueOf(QuizActivity.questionsAttempted));
         if (QuizActivity.questionsAttempted == QuizActivity.mQuizList.size()){
             QuizActivity.score.setCorrect_questions(String.valueOf(score));
             QuizActivity.score.setTotal_questions(String.valueOf(QuizActivity.mQuizList.size()));

@@ -5,6 +5,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.gadgetsfolk.kidsgk.R;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
@@ -20,7 +22,6 @@ public class PlayerActivity extends YouTubeBaseActivity implements YouTubePlayer
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_player);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_player);
@@ -32,20 +33,15 @@ public class PlayerActivity extends YouTubeBaseActivity implements YouTubePlayer
         videoID = getIntent().getStringExtra("videoID");
 
         mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId(PlayerActivity.this.getResources().getString(R.string.interstitial_ad_id));
+        mInterstitialAd.setAdUnitId(PlayerActivity.this.getResources().getString(R.string.vid_interstitial_ad_id));
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
 
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
         if (!b) {
-            // loadVideo() will auto play video
-            // Use cueVideo() method, if you don't want to play it automatically
             youTubePlayer.loadVideo(videoID);
-            // Hiding player controls
-            //player.setPlayerStyle(PlayerStyle.CHROMELESS);
         }
-
     }
 
     @Override
