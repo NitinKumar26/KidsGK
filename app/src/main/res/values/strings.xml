@@ -24,6 +24,10 @@
     <string name="unity_game_id">3798533</string>
     <string name="unity_interstitial">KGInterstitial</string>
     <string name="unity_banner">KGBanner</string>
+    <string name="play_again">Play Again</string>
+    <string name="your_quiz_score">Your Quiz Score is :</string>
+    <string name="slash">/</string>
+    <string name="remark">Remark:</string>
 
     <!--
     <string name="native_advanced_test">ca-app-pub-3940256099942544/2247696110</string>

@@ -72,7 +72,6 @@ object HelperMethods {
         transaction.commit()
     }
 
-
     interface ClickListener {
         fun onClick(position: Int)
     }
@@ -144,4 +143,5 @@ object HelperMethods {
         //Assign native ad object to the native view
         adView.setNativeAd(nativeAd)
     }
+
 }
