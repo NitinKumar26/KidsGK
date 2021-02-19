@@ -9,7 +9,7 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.gadgetsfolk.kidsgk.R
 import com.gadgetsfolk.kidsgk.activity.QuizActivity
-import com.gadgetsfolk.kidsgk.activity.QuizActivity.Companion.viewPager
+import com.gadgetsfolk.kidsgk.activity.QuizActivity.Companion.nonViewPager
 import com.gadgetsfolk.kidsgk.adapter.QuestionFragmentPagerAdapter
 import com.gadgetsfolk.kidsgk.helper.HelperMethods.pix
 import com.gadgetsfolk.kidsgk.model.Quiz

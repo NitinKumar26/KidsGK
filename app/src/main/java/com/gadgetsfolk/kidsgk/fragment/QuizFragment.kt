@@ -59,12 +59,12 @@ class QuizFragment : Fragment() {
 
         mediaWrong?.setOnCompletionListener {
             mediaWrong?.release()
-            QuizActivity.viewPager!!.currentItem = currentPageNumber + 1
+            QuizActivity.nonViewPager?.currentItem = currentPageNumber + 1
         }
 
         mediaCorrect?.setOnCompletionListener {
             mediaCorrect?.release()
-            QuizActivity.viewPager.currentItem = currentPageNumber + 1
+            QuizActivity.nonViewPager?.currentItem = currentPageNumber + 1
         }
 
         tv_option_one.setOnClickListener{ onOptionOneSelected() }
@@ -74,7 +74,7 @@ class QuizFragment : Fragment() {
 
     }
 
-    fun onOptionOneSelected() {
+    private fun onOptionOneSelected() {
         if (tv_option_one.text.toString() == quiz!!.answer) {
             tv_option_one.setBackgroundResource(R.drawable.bg_answer)
             tv_option_two.setOnClickListener(null)
@@ -93,7 +93,7 @@ class QuizFragment : Fragment() {
         setScore(QuizActivity.quizScore)
     }
 
-    fun onOptionTwoSelected() {
+    private fun onOptionTwoSelected() {
         if (tv_option_two.text.toString() == quiz!!.answer) {
             tv_option_two.setBackgroundResource(R.drawable.bg_answer)
             tv_option_three.setOnClickListener(null)
@@ -111,7 +111,7 @@ class QuizFragment : Fragment() {
         setScore(QuizActivity.quizScore)
     }
 
-    fun onOptionThreeSelected() {
+    private fun onOptionThreeSelected() {
         if (tv_option_three.text.toString() == quiz!!.answer) {
             tv_option_three.setBackgroundResource(R.drawable.bg_answer)
             tv_option_four.setOnClickListener(null)
@@ -129,7 +129,7 @@ class QuizFragment : Fragment() {
         setScore(QuizActivity.quizScore)
     }
 
-    fun onOptionFourSelected() {
+    private fun onOptionFourSelected() {
         if (tv_option_four.text.toString() == quiz!!.answer) {
             tv_option_four.setBackgroundResource(R.drawable.bg_answer)
             tv_option_three.setOnClickListener(null)

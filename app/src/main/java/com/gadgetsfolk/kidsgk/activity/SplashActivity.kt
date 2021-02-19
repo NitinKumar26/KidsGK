@@ -10,13 +10,9 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.adcolony.sdk.AdColony
-import com.adcolony.sdk.AdColonyAppOptions
 import com.gadgetsfolk.kidsgk.BuildConfig
 import com.gadgetsfolk.kidsgk.R
 import com.gadgetsfolk.kidsgk.helper.HelperMethods.isNetworkAvailable
-import com.google.ads.mediation.adcolony.AdColonyAdapterUtils
-import com.google.ads.mediation.adcolony.AdColonyMediationAdapter
 import com.google.ads.mediation.unity.UnityMediationAdapter
 import com.google.android.gms.ads.AdFormat
 import com.google.android.gms.ads.MobileAds
@@ -42,37 +38,6 @@ class SplashActivity : AppCompatActivity() {
         metaData["gdpr.consent"] = true
         metaData.commit()
         MobileAds.initialize(this@SplashActivity, getString(R.string.admob_app_id))
-
-        //GDPR Consent for AdColony Personalized Ads
-        val appOptions = AdColonyMediationAdapter.getAppOptions()
-        appOptions.setPrivacyFrameworkRequired(AdColonyAppOptions.GDPR, true)
-        appOptions.setPrivacyConsentString(AdColonyAppOptions.GDPR, "1")
-        appOptions.keepScreenOn = true
-
-        AdColony.configure(this@SplashActivity, appOptions,
-                getString(R.string.adcolony_app_id),
-                getString(R.string.adcolony_interstitial),
-                getString(R.string.adcolony_banner))
-        val bundleInterstitial = Bundle()
-        bundleInterstitial.putString(AdColonyAdapterUtils.KEY_APP_ID, getString(R.string.adcolony_app_id))
-        bundleInterstitial.putString(AdColonyAdapterUtils.KEY_ZONE_ID, getString(R.string.adcolony_interstitial))
-
-        val bundleBanner = Bundle()
-        bundleBanner.putString(AdColonyAdapterUtils.KEY_APP_ID, getString(R.string.adcolony_app_id))
-        bundleBanner.putString(AdColonyAdapterUtils.KEY_ZONE_ID, getString(R.string.adcolony_banner))
-
-        val adColonyMediationAdapter = AdColonyMediationAdapter()
-
-        val config: MutableList<MediationConfiguration> = ArrayList()
-        config.add(MediationConfiguration(AdFormat.INTERSTITIAL, bundleInterstitial))
-        config.add(MediationConfiguration(AdFormat.BANNER, bundleBanner))
-
-        adColonyMediationAdapter.initialize(this@SplashActivity, object : InitializationCompleteCallback {
-            override fun onInitializationSucceeded() {}
-            override fun onInitializationFailed(s: String) {
-                Log.e("adColonyInit", s)
-            }
-        }, config)
 
         val unityInterstitial = Bundle()
         unityInterstitial.putString("gameId", getString(R.string.unity_game_id))
