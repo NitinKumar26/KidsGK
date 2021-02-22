@@ -26,10 +26,12 @@ import java.util.*
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         // Making notification bar transparent
         if (Build.VERSION.SDK_INT >= 21) {
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         }
+
         changeStatusBarColor() //Change Status Bar Color -> Transparent
         setContentView(R.layout.activity_splash)
 
@@ -37,7 +39,7 @@ class SplashActivity : AppCompatActivity() {
         val metaData = MetaData(this)
         metaData["gdpr.consent"] = true
         metaData.commit()
-        MobileAds.initialize(this@SplashActivity, getString(R.string.admob_app_id))
+        MobileAds.initialize(this@SplashActivity)
 
         val unityInterstitial = Bundle()
         unityInterstitial.putString("gameId", getString(R.string.unity_game_id))
