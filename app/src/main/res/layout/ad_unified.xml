@@ -1,4 +1,4 @@
-<com.google.android.gms.ads.formats.UnifiedNativeAdView
+<com.google.android.gms.ads.nativead.NativeAdView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -109,7 +109,7 @@
                     android:textSize="12sp"
                     tools:text="Ad Body more text here if available" />
 
-                <com.google.android.gms.ads.formats.MediaView
+                <com.google.android.gms.ads.nativead.MediaView
                     android:id="@+id/ad_media"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="250dp"
@@ -165,5 +165,5 @@
 
     </LinearLayout>
 
-</com.google.android.gms.ads.formats.UnifiedNativeAdView>
+</com.google.android.gms.ads.nativead.NativeAdView>
 

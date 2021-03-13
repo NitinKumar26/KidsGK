@@ -1,12 +1,15 @@
 package com.gadgetsfolk.kidsgk.activity
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Toast
 import com.gadgetsfolk.kidsgk.R
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.InterstitialAd
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.youtube.player.YouTubeBaseActivity
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
@@ -27,9 +30,22 @@ class PlayerActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListene
         // Initializing video player with developer key
         youtubeView.initialize(getString(R.string.api_key), this)
         videoID = intent.getStringExtra("videoID")
-        mInterstitialAd = InterstitialAd(this)
-        mInterstitialAd!!.adUnitId = this@PlayerActivity.resources.getString(R.string.vid_interstitial_ad_id)
-        mInterstitialAd!!.loadAd(AdRequest.Builder().build())
+
+        InterstitialAd.load(this, getString(R.string.interstitial_ad_id), AdRequest.Builder().build(),
+            object : InterstitialAdLoadCallback() {
+                override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                    // The mInterstitialAd reference will be null until
+                    // an ad is loaded.
+                    mInterstitialAd = interstitialAd
+                    //Log.i(TAG, "onAdLoaded")
+                }
+
+                override fun onAdFailedToLoad(loadAdError: LoadAdError) {
+                    // Handle the error
+                    //Log.i(TAG, loadAdError.message)
+                    mInterstitialAd = null
+                }
+            })
     }
 
     override fun onInitializationSuccess(provider: YouTubePlayer.Provider, youTubePlayer: YouTubePlayer, b: Boolean) {
@@ -49,9 +65,8 @@ class PlayerActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListene
 
     override fun onBackPressed() {
         super.onBackPressed()
-        if (mInterstitialAd!!.isLoaded) {
-            mInterstitialAd!!.show()
-        }
+        if (mInterstitialAd != null) mInterstitialAd?.show(this)
+        else Log.d("TAG: InerstitialError", "The interstitial ad wasn't ready yet.")
     }
 
     companion object {

@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import butterknife.ButterKnife
 import com.bumptech.glide.Glide
 import com.gadgetsfolk.kidsgk.R
 import com.gadgetsfolk.kidsgk.activity.QuizActivity
@@ -23,7 +22,6 @@ class QuizFragment : Fragment() {
     private var mediaCorrect: MediaPlayer? = null
     private var mediaWrong: MediaPlayer? = null
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
@@ -31,7 +29,6 @@ class QuizFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_quiz, container, false)
-        ButterKnife.bind(this, view)
         return view
     }
 

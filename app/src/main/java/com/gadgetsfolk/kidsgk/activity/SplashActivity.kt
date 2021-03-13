@@ -24,6 +24,7 @@ import com.unity3d.ads.metadata.MetaData
 import java.util.*
 
 class SplashActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -35,43 +36,12 @@ class SplashActivity : AppCompatActivity() {
         changeStatusBarColor() //Change Status Bar Color -> Transparent
         setContentView(R.layout.activity_splash)
 
-        //GDPR consent for Unity Personalized Ads
-        val metaData = MetaData(this)
-        metaData["gdpr.consent"] = true
-        metaData.commit()
-        MobileAds.initialize(this@SplashActivity)
-
-        val unityInterstitial = Bundle()
-        unityInterstitial.putString("gameId", getString(R.string.unity_game_id))
-        unityInterstitial.putString("zoneId", getString(R.string.unity_interstitial))
-
-        val unityBanner = Bundle()
-        unityBanner.putString("gameId", getString(R.string.unity_game_id))
-        unityBanner.putString("zoneId", getString(R.string.unity_banner))
-
-        val unityConfig: MutableList<MediationConfiguration> = ArrayList()
-        unityConfig.add(MediationConfiguration(AdFormat.INTERSTITIAL, unityInterstitial))
-        unityConfig.add(MediationConfiguration(AdFormat.BANNER, unityBanner))
-
-        val adapter = UnityMediationAdapter()
-        adapter.initialize(this, object : InitializationCompleteCallback {
-            override fun onInitializationSucceeded() {}
-            override fun onInitializationFailed(s: String) {
-                Log.e("unityInit", s)
-            }
-        }, unityConfig)
-
-
         //BuildConfig.VERSION_NAME
         val versionCode = BuildConfig.VERSION_CODE
         versionCodeApp = versionCode.toString()
         if (isNetworkAvailable(this@SplashActivity)) checkVersionCode()
         else Toast.makeText(this@SplashActivity, "Please check your Internet connection", Toast.LENGTH_SHORT).show()
 
-        if (BuildConfig.DEBUG) {
-            val configuration = RequestConfiguration.Builder().setTestDeviceIds(listOf("69D4E189C8A6E5F18028F747691D0BC6")).build()
-            MobileAds.setRequestConfiguration(configuration)
-        }
     }
 
     /**

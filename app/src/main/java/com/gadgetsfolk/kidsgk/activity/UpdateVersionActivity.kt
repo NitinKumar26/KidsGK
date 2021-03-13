@@ -4,28 +4,29 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.gadgetsfolk.kidsgk.R
+import com.gadgetsfolk.kidsgk.databinding.ActivityUpdateVersionBinding
 import com.google.android.gms.ads.AdRequest
-import kotlinx.android.synthetic.main.activity_update_version.*
 
 class UpdateVersionActivity : AppCompatActivity() {
+    private lateinit var binding:ActivityUpdateVersionBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_update_version)
+
+        binding = ActivityUpdateVersionBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         val adRequest = AdRequest.Builder().build()
-        adView.loadAd(adRequest)
+        binding.adView.loadAd(adRequest)
 
-        update_now_button.setOnClickListener{
+        binding.updateNowButton.setOnClickListener{
             updateNow()
         }
     }
 
-
     fun updateNow() {
-        val intent = Intent("android.intent.action.VIEW",
-                Uri.parse("https://play.google.com/store/apps/details?id=com.gadgetsfolk.kidsgk"))
+        val intent = Intent("android.intent.action.VIEW", Uri.parse("https://play.google.com/store/apps/details?id=com.gadgetsfolk.kidsgk"))
         startActivity(intent)
     }
 

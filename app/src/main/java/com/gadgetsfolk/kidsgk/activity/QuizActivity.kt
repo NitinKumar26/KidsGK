@@ -2,29 +2,24 @@ package com.gadgetsfolk.kidsgk.activity
 
 import android.os.Bundle
 import android.view.View
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.gadgetsfolk.kidsgk.R
-import com.gadgetsfolk.kidsgk.activity.QuizActivity
-import com.gadgetsfolk.kidsgk.activity.QuizActivity.Companion.nonViewPager
 import com.gadgetsfolk.kidsgk.adapter.QuestionFragmentPagerAdapter
+import com.gadgetsfolk.kidsgk.databinding.ActivityQuizBinding
 import com.gadgetsfolk.kidsgk.helper.HelperMethods.pix
 import com.gadgetsfolk.kidsgk.model.Quiz
 import com.gadgetsfolk.kidsgk.model.QuizType
 import com.gadgetsfolk.kidsgk.model.Score
 import com.gadgetsfolk.kidsgk.utils.NonSwipeableViewpager
-import com.google.android.material.tabs.TabLayout
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_quiz.*
 import java.util.*
 
 class QuizActivity : AppCompatActivity() {
 
     private var mQuizType: QuizType? = null
     private var mQuizSubType: QuizType? = null
+    private lateinit var binding: ActivityQuizBinding
 
     override fun onBackPressed() {
         super.onBackPressed()
@@ -35,18 +30,20 @@ class QuizActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_quiz)
+        binding = ActivityQuizBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         mQuizType = intent.getParcelableExtra("quiz_type")
         mQuizSubType = intent.getParcelableExtra("quiz_sub_type")
 
-        nonViewPager = viewPager
+        nonViewPager = binding.viewPager
 
         mQuizList = ArrayList()
         questions
-        viewPager.pageMargin = pix(this@QuizActivity, 24)
-        viewPager.clipToPadding = false
-        viewPager.setPadding(pix(this@QuizActivity, 20), pix(this@QuizActivity, 0),
+        binding.viewPager.pageMargin = pix(this@QuizActivity, 24)
+        binding.viewPager.clipToPadding = false
+        binding.viewPager.setPadding(pix(this@QuizActivity, 20), pix(this@QuizActivity, 0),
                 pix(this@QuizActivity, 20), pix(this@QuizActivity, 20))
     }
 
@@ -63,13 +60,13 @@ class QuizActivity : AppCompatActivity() {
                         mQuizList!!.addAll(questions)
                         mQuizList!!.shuffle()
                         val questionFragmentPagerAdapter = QuestionFragmentPagerAdapter(supportFragmentManager)
-                        viewPager.adapter = questionFragmentPagerAdapter //Set the DealSliderAdapter with Viewpager;
-                        viewPager!!.offscreenPageLimit = mQuizList!!.size + 1
-                        indicator.setupWithViewPager(viewPager)
+                        binding.viewPager.adapter = questionFragmentPagerAdapter //Set the DealSliderAdapter with Viewpager;
+                        binding.viewPager.offscreenPageLimit = mQuizList!!.size + 1
+                        binding.indicator.setupWithViewPager(binding.viewPager)
                     }.addOnFailureListener {
                         Toast.makeText(this@QuizActivity, "Unable to get questions.", Toast.LENGTH_LONG).show() }
                     .addOnCompleteListener {
-                        progress_circular.visibility = View.GONE }
+                        binding.progressCircular.visibility = View.GONE }
         }
 
     companion object {

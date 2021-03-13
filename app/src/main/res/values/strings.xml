@@ -16,14 +16,21 @@
     <string name="native_ad_unit">ca-app-pub-4214231949040116/2738998426</string>
     <string name="interstitial_ad_id">ca-app-pub-4214231949040116/3605824479</string>
     <string name="vid_interstitial_ad_id">ca-app-pub-4214231949040116/7071050163</string>
+    <string name="app_open_ad_id">ca-app-pub-4214231949040116/1246597861</string>
+
+    <!-- Unity Keys -->
+    <string name="game_id">gameId</string>
+    <string name="zone_id">zoneId</string>
+    <string name="gdpr_consent">gdpr.consent</string>
+    <!-- Unity Credentials -->
+    <string name="unity_game_id">3798533</string>
+    <string name="unity_interstitial">KGInterstitial</string>
+    <string name="unity_banner">KGBanner</string>
     
     <string name="adcolony_app_id">app04b6e7f570e14a4099</string>
     <string name="adcolony_interstitial">vzf2a08536b08544bf8b</string>
     <string name="adcolony_banner">vz2a6a2671708740fb88</string>
 
-    <string name="unity_game_id">3798533</string>
-    <string name="unity_interstitial">KGInterstitial</string>
-    <string name="unity_banner">KGBanner</string>
     <string name="play_again">Play Again</string>
     <string name="your_quiz_score">Your Quiz Score is :</string>
     <string name="slash">/</string>
