@@ -9,6 +9,7 @@ import com.google.ads.mediation.unity.UnityMediationAdapter
 import com.google.android.gms.ads.AdFormat
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.RequestConfiguration
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener
 import com.google.android.gms.ads.mediation.InitializationCompleteCallback
 import com.google.android.gms.ads.mediation.MediationConfiguration
 import com.unity3d.ads.metadata.MetaData
@@ -47,6 +48,5 @@ class MyApplication : Application() {
                 Log.e("unityInit", s)
             }
         }, unityConfig)
-
     }
 }

@@ -18,8 +18,10 @@ import com.google.firebase.firestore.QuerySnapshot
 import java.util.*
 
 class MoreAppsActivity : AppCompatActivity() {
+
     private var moreAppsItems: ArrayList<MoreAppsItem>? = null
     var adapter: MoreAppsAdapter? = null
+
     private lateinit var binding: ActivityMoreAppsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +29,7 @@ class MoreAppsActivity : AppCompatActivity() {
         binding = ActivityMoreAppsBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
         moreAppsItems = ArrayList<MoreAppsItem>()
         adapter = MoreAppsAdapter(this, moreAppsItems)
         binding.recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
@@ -43,7 +46,7 @@ class MoreAppsActivity : AppCompatActivity() {
 
     private val moreApps: Unit get() {
             FirebaseFirestore.getInstance()
-                .collection("more_apps_cc").get()
+                .collection("more_apps").get()
                 .addOnCompleteListener { binding.progressBar.visibility = View.GONE }
                 .addOnSuccessListener { queryDocumentSnapshots: QuerySnapshot ->
                         val items: List<MoreAppsItem> = queryDocumentSnapshots.toObjects(MoreAppsItem::class.java)

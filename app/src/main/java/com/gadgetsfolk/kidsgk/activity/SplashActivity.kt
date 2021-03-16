@@ -5,23 +5,20 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.gadgetsfolk.kidsgk.BuildConfig
+//import com.gadgetsfolk.kidsgk.BuildConfig
 import com.gadgetsfolk.kidsgk.R
 import com.gadgetsfolk.kidsgk.helper.HelperMethods.isNetworkAvailable
-import com.google.ads.mediation.unity.UnityMediationAdapter
-import com.google.android.gms.ads.AdFormat
-import com.google.android.gms.ads.MobileAds
-import com.google.android.gms.ads.RequestConfiguration
-import com.google.android.gms.ads.mediation.InitializationCompleteCallback
-import com.google.android.gms.ads.mediation.MediationConfiguration
 import com.google.firebase.firestore.FirebaseFirestore
-import com.unity3d.ads.metadata.MetaData
 import java.util.*
+import android.content.pm.PackageManager
+
+import android.content.pm.PackageInfo
+
+import android.R.attr.versionCode
 
 class SplashActivity : AppCompatActivity() {
 
@@ -36,11 +33,23 @@ class SplashActivity : AppCompatActivity() {
         changeStatusBarColor() //Change Status Bar Color -> Transparent
         setContentView(R.layout.activity_splash)
 
-        //BuildConfig.VERSION_NAME
-        val versionCode = BuildConfig.VERSION_CODE
-        versionCodeApp = versionCode.toString()
-        if (isNetworkAvailable(this@SplashActivity)) checkVersionCode()
-        else Toast.makeText(this@SplashActivity, "Please check your Internet connection", Toast.LENGTH_SHORT).show()
+        try {
+            val pInfo: PackageInfo =
+                this.packageManager.getPackageInfo(this.packageName, 0)
+            val versionCode: Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                pInfo.longVersionCode.toInt() // avoid huge version numbers and you will be ok
+            } else {
+                pInfo.versionCode
+            }
+            //val versionCode = pInfo.longVersionCode
+            versionCodeApp = versionCode.toString()
+            if (isNetworkAvailable(this@SplashActivity)) checkVersionCode()
+            else Toast.makeText(this@SplashActivity, "Please check your Internet connection", Toast.LENGTH_SHORT).show()
+        } catch (e: PackageManager.NameNotFoundException) {
+            e.printStackTrace()
+        }
+
+
 
     }
 

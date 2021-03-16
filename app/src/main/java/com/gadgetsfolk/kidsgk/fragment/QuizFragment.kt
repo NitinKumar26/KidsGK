@@ -11,9 +11,9 @@ import com.bumptech.glide.Glide
 import com.gadgetsfolk.kidsgk.R
 import com.gadgetsfolk.kidsgk.activity.QuizActivity
 import com.gadgetsfolk.kidsgk.activity.ScoreActivity
+import com.gadgetsfolk.kidsgk.databinding.FragmentQuizBinding
 import com.gadgetsfolk.kidsgk.model.Quiz
 import com.google.android.gms.ads.AdRequest
-import kotlinx.android.synthetic.main.fragment_quiz.*
 import java.util.*
 
 class QuizFragment : Fragment() {
@@ -22,14 +22,19 @@ class QuizFragment : Fragment() {
     private var mediaCorrect: MediaPlayer? = null
     private var mediaWrong: MediaPlayer? = null
 
+    private var _binding: FragmentQuizBinding? = null
+    //This property is only valid between onCreateView and
+    //onDestroyView
+    private val binding get() = _binding!!
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_quiz, container, false)
-        return view
+        _binding = FragmentQuizBinding.inflate(inflater, container, false)
+        return  binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,20 +44,20 @@ class QuizFragment : Fragment() {
         mediaCorrect = MediaPlayer.create(context, R.raw.correct)
         mediaWrong = MediaPlayer.create(context, R.raw.wrong)
         val adRequest = AdRequest.Builder().build()
-        adView.loadAd(adRequest)
+        binding.adView.loadAd(adRequest)
         val options = ArrayList<String?>()
         options.add(quiz!!.option_one)
         options.add(quiz!!.option_two)
         options.add(quiz!!.option_three)
         options.add(quiz!!.option_four)
         options.shuffle()
-        tv_question.text = quiz!!.question //Set Question
-        tv_option_one.text = options[0] //Set Option One
-        tv_option_two.text = options[1] //Set Option Two
-        tv_option_three.text = options[2] //Set Option Three
-        tv_option_four.text = options[3] //Set Option Four
+        binding.tvQuestion.text = quiz!!.question //Set Question
+        binding.tvOptionOne.text = options[0] //Set Option One
+        binding.tvOptionTwo.text = options[1] //Set Option Two
+        binding.tvOptionThree.text = options[2] //Set Option Three
+        binding.tvOptionFour.text = options[3] //Set Option Four
 
-        Glide.with(view.context).load(quiz!!.img_url).placeholder(R.color.colorGrey).into(img_question)
+        Glide.with(view.context).load(quiz!!.img_url).placeholder(R.color.colorGrey).into(binding.imgQuestion)
 
         mediaWrong?.setOnCompletionListener {
             mediaWrong?.release()
@@ -64,26 +69,26 @@ class QuizFragment : Fragment() {
             QuizActivity.nonViewPager?.currentItem = currentPageNumber + 1
         }
 
-        tv_option_one.setOnClickListener{ onOptionOneSelected() }
-        tv_option_two.setOnClickListener{ onOptionTwoSelected() }
-        tv_option_three.setOnClickListener{ onOptionThreeSelected() }
-        tv_option_four.setOnClickListener{ onOptionFourSelected() }
+        binding.tvOptionOne.setOnClickListener{ onOptionOneSelected() }
+        binding.tvOptionTwo.setOnClickListener{ onOptionTwoSelected() }
+        binding.tvOptionThree.setOnClickListener{ onOptionThreeSelected() }
+        binding.tvOptionFour.setOnClickListener{ onOptionFourSelected() }
 
     }
 
     private fun onOptionOneSelected() {
-        if (tv_option_one.text.toString() == quiz!!.answer) {
-            tv_option_one.setBackgroundResource(R.drawable.bg_answer)
-            tv_option_two.setOnClickListener(null)
-            tv_option_three.setOnClickListener(null)
-            tv_option_four.setOnClickListener(null)
+        if (binding.tvOptionOne.text.toString() == quiz!!.answer) {
+            binding.tvOptionOne.setBackgroundResource(R.drawable.bg_answer)
+            binding.tvOptionTwo.setOnClickListener(null)
+            binding.tvOptionThree.setOnClickListener(null)
+            binding.tvOptionFour.setOnClickListener(null)
             mediaCorrect!!.start()
             QuizActivity.quizScore += 1
         } else {
-            tv_option_one.setBackgroundResource(R.drawable.bg_wrong_answer)
-            tv_option_two.setOnClickListener(null)
-            tv_option_three.setOnClickListener(null)
-            tv_option_four.setOnClickListener(null)
+            binding.tvOptionOne.setBackgroundResource(R.drawable.bg_wrong_answer)
+            binding.tvOptionTwo.setOnClickListener(null)
+            binding.tvOptionThree.setOnClickListener(null)
+            binding.tvOptionFour.setOnClickListener(null)
             mediaWrong!!.start()
             //QuizActivity.viewPager.setCurrentItem(currentPageNumber + 1);
         }
@@ -91,54 +96,54 @@ class QuizFragment : Fragment() {
     }
 
     private fun onOptionTwoSelected() {
-        if (tv_option_two.text.toString() == quiz!!.answer) {
-            tv_option_two.setBackgroundResource(R.drawable.bg_answer)
-            tv_option_three.setOnClickListener(null)
-            tv_option_four.setOnClickListener(null)
-            tv_option_one.setOnClickListener(null)
+        if (binding.tvOptionTwo.text.toString() == quiz!!.answer) {
+            binding.tvOptionTwo.setBackgroundResource(R.drawable.bg_answer)
+            binding.tvOptionThree.setOnClickListener(null)
+            binding.tvOptionFour.setOnClickListener(null)
+            binding.tvOptionOne.setOnClickListener(null)
             mediaCorrect!!.start()
             QuizActivity.quizScore += 1
         } else {
-            tv_option_two.setBackgroundResource(R.drawable.bg_wrong_answer)
-            tv_option_three.setOnClickListener(null)
-            tv_option_four.setOnClickListener(null)
-            tv_option_one.setOnClickListener(null)
+            binding.tvOptionTwo.setBackgroundResource(R.drawable.bg_wrong_answer)
+            binding.tvOptionThree.setOnClickListener(null)
+            binding.tvOptionFour.setOnClickListener(null)
+            binding.tvOptionOne.setOnClickListener(null)
             mediaWrong!!.start()
         }
         setScore(QuizActivity.quizScore)
     }
 
     private fun onOptionThreeSelected() {
-        if (tv_option_three.text.toString() == quiz!!.answer) {
-            tv_option_three.setBackgroundResource(R.drawable.bg_answer)
-            tv_option_four.setOnClickListener(null)
-            tv_option_one.setOnClickListener(null)
-            tv_option_two.setOnClickListener(null)
+        if (binding.tvOptionThree.text.toString() == quiz!!.answer) {
+            binding.tvOptionThree.setBackgroundResource(R.drawable.bg_answer)
+            binding.tvOptionFour.setOnClickListener(null)
+            binding.tvOptionOne.setOnClickListener(null)
+            binding.tvOptionTwo.setOnClickListener(null)
             mediaCorrect!!.start()
             QuizActivity.quizScore += 1
         } else {
-            tv_option_three.setBackgroundResource(R.drawable.bg_wrong_answer)
-            tv_option_four.setOnClickListener(null)
-            tv_option_one.setOnClickListener(null)
-            tv_option_two.setOnClickListener(null)
+            binding.tvOptionThree.setBackgroundResource(R.drawable.bg_wrong_answer)
+            binding.tvOptionFour.setOnClickListener(null)
+            binding.tvOptionOne.setOnClickListener(null)
+            binding.tvOptionTwo.setOnClickListener(null)
             mediaWrong!!.start()
         }
         setScore(QuizActivity.quizScore)
     }
 
     private fun onOptionFourSelected() {
-        if (tv_option_four.text.toString() == quiz!!.answer) {
-            tv_option_four.setBackgroundResource(R.drawable.bg_answer)
-            tv_option_three.setOnClickListener(null)
-            tv_option_two.setOnClickListener(null)
-            tv_option_one.setOnClickListener(null)
+        if (binding.tvOptionFour.text.toString() == quiz!!.answer) {
+            binding.tvOptionFour.setBackgroundResource(R.drawable.bg_answer)
+            binding.tvOptionThree.setOnClickListener(null)
+            binding.tvOptionTwo.setOnClickListener(null)
+            binding.tvOptionOne.setOnClickListener(null)
             mediaCorrect!!.start()
             QuizActivity.quizScore += 1
         } else {
-            tv_option_four.setBackgroundResource(R.drawable.bg_wrong_answer)
-            tv_option_three.setOnClickListener(null)
-            tv_option_two.setOnClickListener(null)
-            tv_option_one.setOnClickListener(null)
+            binding.tvOptionFour.setBackgroundResource(R.drawable.bg_wrong_answer)
+            binding.tvOptionThree.setOnClickListener(null)
+            binding.tvOptionTwo.setOnClickListener(null)
+            binding.tvOptionOne.setOnClickListener(null)
             mediaWrong!!.start()
         }
         setScore(QuizActivity.quizScore)

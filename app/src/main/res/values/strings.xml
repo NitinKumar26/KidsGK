@@ -36,11 +36,10 @@
     <string name="slash">/</string>
     <string name="remark">Remark:</string>
 
-    <!--
+
     <string name="native_advanced_test">ca-app-pub-3940256099942544/2247696110</string>
     <string name="banner_test_ad_id">ca-app-pub-3940256099942544/6300978111</string>
     <string name="test_interstitial">ca-app-pub-3940256099942544/1033173712</string>
-    -->
 
     <string name="api_key">AIzaSyBz3yFUUy94BuVlcBDlA6NHY5l_ekgG9is</string>
     <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>

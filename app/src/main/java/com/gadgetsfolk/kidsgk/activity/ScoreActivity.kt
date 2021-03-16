@@ -173,7 +173,7 @@ class ScoreActivity : AppCompatActivity() {
      */
     private fun refreshAd() {
         //refresh.setEnabled(false);
-        val builder = AdLoader.Builder(this, getString(R.string.native_ad_unit))
+        val builder = AdLoader.Builder(this, getString(R.string.native_advanced_test))
         builder.forNativeAd(NativeAd.OnNativeAdLoadedListener { nativeAd ->
             //OnNativeAdLoadedListener implementation.
             //If this callback occurs after the activity is destroyed, you must call
