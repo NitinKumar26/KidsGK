@@ -43,5 +43,8 @@
 
     <string name="api_key">AIzaSyBz3yFUUy94BuVlcBDlA6NHY5l_ekgG9is</string>
     <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
+    <string name="verify_mobile_number">Send OTP</string>
+    <string name="mobile_number">Enter Mobile No.</string>
+    <string name="name">Name</string>
 
 </resources>

@@ -49,6 +49,9 @@
         <activity android:name=".activity.UpdateVersionActivity"
             android:screenOrientation="portrait" />
 
+        <activity android:name=".activity.SignupActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>
