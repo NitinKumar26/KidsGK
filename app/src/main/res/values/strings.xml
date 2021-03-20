@@ -10,6 +10,9 @@
     <string name="second_banner">second_banner</string>
     <string name="quiz">Quiz</string>
     <string name="video">Videos</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_up_now">Sign Up Now</string>
 
     <string name="admob_app_id">ca-app-pub-4214231949040116~9163055877</string>
     <string name="banner_ad_id">ca-app-pub-4214231949040116/5335491509</string>
@@ -46,5 +49,6 @@
     <string name="verify_mobile_number">Send OTP</string>
     <string name="mobile_number">Enter Mobile No.</string>
     <string name="name">Name</string>
+    <string name="login"><u>Login</u></string>
 
 </resources>
